@@ -76,18 +76,11 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
+          <Section title="Our Mission">
+          At GameSphere, our mission is to empower gamers with the latest news, reviews, and updates from trusted sources, all in one place. We aim to create a vibrant community where players can stay informed, discover new releases, and engage with fellow enthusiasts. By providing accurate, up-to-date information and fostering meaningful conversations, we strive to enhance the gaming experience for players everywhere.
           </Section>
           <Section title="Learn More">
-            Read the docs to discover what to do next:
+            Read the following and discover what we have to offer:
           </Section>
           <LearnMoreLinks />
         </View>
