@@ -1,29 +1,20 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../types';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-// Define the type of the navigation prop based on the RootStackParamList
-type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
-
-interface LoginScreenProps {
-  navigation: LoginScreenNavigationProp;
-}
-
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>GameSphere</Text>
       <Image
-        source={{ uri: 'https://path-to-your-image.png' }} // Replace with your image URL
+        source={{ uri: 'https://path-to-your-image.png' }} // Replace with the actual image path
         style={styles.logo}
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Home')}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.signUpButton]} onPress={() => navigation.navigate('SignUp')}>
-          <Text style={[styles.buttonText, styles.signUpButtonText]}>Sign Up</Text>
+        <TouchableOpacity style={[styles.button, styles.signUpButton]}>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -64,9 +55,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
   },
-  signUpButtonText: {
-    color: '#FFFFFF',
-  },
 });
+
 
 export default LoginScreen;
