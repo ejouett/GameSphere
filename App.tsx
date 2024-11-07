@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './src/screens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import ReviewScreen from './src/screens/ReviewScreen';
+import ForumScreen from './src/screens/ForumScreen';
 
 const Stack = createNativeStackNavigator();
 export type RootStackParamList = {
@@ -29,6 +30,7 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'GameSphere Features' }} />
         <Stack.Screen name="Reviews" component={ReviewScreen} options={{ title: 'Reviews' }} />
+        <Stack.Screen name="Forum" component={ForumScreen} options={{ title: 'Community Forum' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

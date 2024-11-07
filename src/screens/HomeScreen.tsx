@@ -8,6 +8,10 @@ const HomeScreen = ({ navigation })  => {
         <Text style={styles.cardTitle}>Game Reviews</Text>
         <Text style={styles.cardDescription}>See reviews about video games.</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Forum')}>
+        <Text style={styles.cardTitle}>Community Forum</Text>
+        <Text style={styles.cardDescription}>Join discussions with other gamers.</Text>
+      </TouchableOpacity>
       {/* Add more cards for other sections as needed */}
     </View>
   );
