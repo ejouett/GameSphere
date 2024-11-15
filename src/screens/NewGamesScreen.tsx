@@ -1,62 +1,65 @@
 // src/screens/NewGamesScreen.tsx
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+// src/screens/NewGamesScreen.tsx
+//import React, { useState } from 'react';
+//import { View, Text, StyleSheet, FlatList, TouchableOpacity, TextInput } from 'react-native';
+import { fetchGames, Game } from '../servicesAPIs/api';
 
-const games = [
-  { id: '1', title: 'Game A', releaseDate: '2024-11-15' },
-  { id: '2', title: 'Game B', releaseDate: '2024-12-01' },
-  { id: '3', title: 'Game C', releaseDate: '2025-01-10' },
-  // Add more games as needed
-];
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, FlatList, StyleSheet } from 'react-native';
+//import { fetchGames, Game } from '../api/rawgApi';
 
-const NewGamesScreen = () => {
-  const renderGame = ({ item }) => (
-    <TouchableOpacity style={styles.gameCard}>
-      <Text style={styles.gameTitle}>{item.title}</Text>
-      <Text style={styles.gameReleaseDate}>Release Date: {item.releaseDate}</Text>
-    </TouchableOpacity>
-  );
+const NewGamesScreen: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [games, setGames] = useState<Game[]>([]);
+
+  useEffect(() => {
+    loadGames();
+  }, []);
+
+  const loadGames = async (query = '') => {
+    const fetchedGames = await fetchGames(query);
+    setGames(fetchedGames);
+  };
+
+  const handleSearch = (text: string) => {
+    setSearchQuery(text);
+    loadGames(text);
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Best New & Upcoming Releases</Text>
+      <Text style={styles.title}>New Games</Text>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search games..."
+        value={searchQuery}
+        onChangeText={handleSearch}
+      />
       <FlatList
         data={games}
-        renderItem={renderGame}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.gameItem}>
+            <Text style={styles.gameTitle}>{item.name}</Text>
+            <Text>Release Date: {item.released}</Text>
+            <Text>Rating: {item.rating}</Text>
+          </View>
+        )}
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#FFFFFF',
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  gameCard: {
-    padding: 15,
-    marginVertical: 10,
-    borderWidth: 1,
-    borderColor: '#DDD',
-    borderRadius: 8,
-    backgroundColor: '#F5F5F5',
-  },
-  gameTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  gameReleaseDate: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 5,
-  },
+  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 16 },
+  searchInput: { padding: 8, borderColor: '#ccc', borderWidth: 1, borderRadius: 4, marginBottom: 16 },
+  gameItem: { marginBottom: 16, padding: 8, backgroundColor: '#f4f4f8', borderRadius: 8 },
+  gameTitle: { fontSize: 18, fontWeight: '600' },
 });
 
 export default NewGamesScreen;
+
+
+
+
